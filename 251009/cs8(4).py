@@ -11,11 +11,11 @@ def animate_text(canvas, text_id):
 
 def update_text_size(canvas, text_id):
     current_size = 100
-    new_size = current_size + random.randint(-00, 100)
+    new_size = current_size + random.randint(-100, 100)
     canvas.itemconfigure(text_id, font=("Helvetica", new_size))
 
 def update_text_color(canvas, text_id):
-    colors = ["red", "green", "blue", "orange", "purple", "pink", "cyan", "yello"]
+    colors = ["red", "green", "blue", "orange", "purple", "pink", "cyan", "yellow"]
     new_color = random.choice(colors)
     canvas.itemconfigure(text_id, fill=new_color)
 
@@ -26,7 +26,7 @@ root.title("Text Animation")
 canvas = tk.Canvas(root, width=400, height=200)
 canvas.pack()
 
-text_id = canvas.create_text(200, 100, text="Hello", font = ("Helvetica, 12"), fill = "black")
+text_id = canvas.create_text(200, 100, text="Hello", font=("Helvetica", 12), fill="black")
 
 # 애니메이션 실행
 animate_text(canvas, text_id)
