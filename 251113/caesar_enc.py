@@ -10,15 +10,15 @@ def caesar_cipher(text, key):
     return result
 
 def encrypt_file(input_file, output_file, key):
-    with open(input_file, 'r') as file:
+    with open(input_file, 'r', encoding='utf-8') as file:
         plaintext = file.read()
     encrypted_text = caesar_cipher(plaintext, key)
-    with open(output_file, 'w') as file:
+    with open(output_file, 'w', encoding='utf-8') as file:
         file.write(encrypted_text)
 
 # 예시
-input_filename = 'chapter12\\phones.txt'
-encrypted_filename = 'chapter12\\phones(enc).txt'
+input_filename = 'C:/Python/251113/phones.txt'
+encrypted_filename = 'C:/Python/251113/phones(enc).txt'
 encryption_key = 3
 
 # 파일 암호화

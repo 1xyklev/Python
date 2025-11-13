@@ -1,4 +1,4 @@
-infile = open(r"chapter12\proverbs.txt", "r")
+infile = open("C:/Python/251113/proverbs.txt", "r")
 
 for line in infile:
     line = line.rstrip()

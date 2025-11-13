@@ -1,6 +1,6 @@
 import os.path
 
-outfile = open(r"chapter12\phones.txt", "w",  encoding="utf-8")
+outfile = open("C:/Python/251113/phones.txt", "w",  encoding="utf-8")
 
 if os.path.isfile("phones.txt"):
     print("동일한 이름의 파일이 이미 존재합니다. ")

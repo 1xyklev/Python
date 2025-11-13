@@ -1,4 +1,4 @@
-outfile = open(r"chapter12\phones.txt", "w", encoding="utf-8")
+outfile = open("C:/Python/251113/phones.txt", "w", encoding="utf-8")
 outfile.write("김덕성 010-1234-5678\n")
 outfile.write("김성덕 010-1234-5679\n")
 outfile.write("우이동 010-1234-5680\n")

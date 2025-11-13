@@ -1,5 +1,5 @@
 # 파일을 연다.
-f = open(r"chapter12\data.csv", "r")
+f = open("C:/Python/251113/data.csv", "r")
 
 # 파일 안의 각 줄을 처리한다. 
 for line in f.readlines():

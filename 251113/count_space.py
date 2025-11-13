@@ -3,7 +3,7 @@ import os
 def parse_file(path):
     infile = open(path) # 파일을 읽기 모드로 열어 infile에 저장
     
-    spaces = 0 #변수 초기화
+    spaces = 0 # 변수 초기화
     tabs = 0
 
     # 파일을 한 줄씩 읽어서 스페이스와 탭의 개수를 센다.
