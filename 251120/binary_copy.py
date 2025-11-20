@@ -8,7 +8,7 @@ with open(source_file, 'rb') as source:
             if not chunk:
                 break
 
-            #print(f"복사중 데이터(16 bytes): {chunk}")  # 어떤 데이터가 복사되는지 출력
+            # print(f"복사중 데이터(16 bytes): {chunk}")  # 어떤 데이터가 복사되는지 출력
 
             destination.write(chunk)
 
