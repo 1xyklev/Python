@@ -2,33 +2,29 @@ import tkinter as tk
 import math
 
 class Shape:
-    def __init__(self, x, y): 
-        self.x, self.y = x, y
-    def area(self): 
-        raise NotImplementedError
-    def perimeter(self): 
-        raise NotImplementedError
-    def draw(self, canvas): 
-        raise NotImplementedError
+    def area(self):
+        raise NotImplementedError   # NotImplementedError > 아직 구현되지 않음을 알리는 특수한 예외
+    def perimeter(self):
+        raise NotImplementedError   # (보통 추상 메소드 역할을 할 때 사용)
+    def draw(self, canvas):
+        raise NotImplementedError   # 부모 클래스에서 추상 메소드를 정의할 때, 자식 클래스가 반드시 구현하도록 강제하는 장치
 
 class Rectangle(Shape):
     def __init__(self, x, y, w, h):
-        super().__init__(x, y) 
-        self.w, self.h = w, h
-    def area(self): 
+        self.x, self.y, self.w, self.h = x, y, w, h
+    def area(self):
         return self.w * self.h
-    def perimeter(self): 
+    def perimeter(self):
         return 2 * (self.w + self.h)
     def draw(self, canvas):
         canvas.create_rectangle(self.x, self.y, self.x + self.w, self.y + self.h, fill="tomato")
 
 class Circle(Shape):
     def __init__(self, x, y, r):
-        super().__init__(x, y)
-        self.r = r
-    def area(self): 
+        self.x, self.y, self.r = x, y, r
+    def area(self):
         return math.pi * self.r ** 2
-    def perimeter(self): 
+    def perimeter(self):
         return 2 * math.pi * self.r
     def draw(self, canvas):
         canvas.create_oval(self.x - self.r, self.y - self.r, self.x + self.r, self.y + self.r, fill="skyblue")
@@ -42,12 +38,14 @@ var = tk.StringVar(value="rect")
 info = tk.StringVar(value="도형을 선택하고 그리기를 누르세요.")
 tk.Label(root, textvariable=info).pack()
 
-frm = tk.Frame(root); frm.pack(pady=6, anchor="center")
+frm = tk.Frame(root)
+frm.pack(pady=6, anchor="center")
+
 tk.Radiobutton(frm, text="사각형", value="rect", variable=var).pack(side="left", padx=6)
 tk.Radiobutton(frm, text="원", value="circle", variable=var).pack(side="left", padx=6)
 
 def draw_shape():
-    canvas.delete("all")
+    canvas.delete("all")  # 여러 도형을 동시에 그리려면 이 줄 제거
     if var.get() == "rect":
         s = Rectangle(50, 50, 100, 60)
     else:

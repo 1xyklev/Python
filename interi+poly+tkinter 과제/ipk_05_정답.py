@@ -58,6 +58,30 @@ result_var = StringVar(value="등록 정보를 확인하세요.")
 label5 = Label(frame, textvariable=result_var, fg="blue", wraplength=500, justify="left")
 label5.grid(row=3, column=0, columnspan=4, pady=15)
 
+def register():
+    pet_name = entry.get() or "이름없음"
+    kind = pet_type.get()
+    pet = Dog(pet_name) if kind == "Dog" else Cat(pet_name)
+    person.pet = pet
+
+    vac = "O" if vaccinated.get() else "X"
+    neu = "O" if neutered.get() else "X"
+    kind_kor = "강아지" if kind == "Dog" else "고양이"
+
+    msg = (f"{person.name}의 반려동물 등록 완료!\n"
+           f"이름: {pet.name} ({kind_kor})\n"
+           f"소리: {pet.speak()}\n"
+           f"예방접종: {vac}, 중성화: {neu}")
+    result_var.set(msg)
+
+def reset():
+    entry.delete(0, END)
+    pet_type.set("Dog")
+    vaccinated.set(0)
+    neutered.set(0)
+    person.pet = None
+    result_var.set("등록 정보를 확인하세요.")
+
 frm_btn = Frame(root)
 frm_btn.pack(pady=5)
 Button(frm_btn, text="등록하기", width=12, command=register).pack(side="left", padx=15)
