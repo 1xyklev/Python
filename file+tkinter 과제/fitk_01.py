@@ -1,6 +1,12 @@
+import os
+
 def read_file(filename):
     try:
-        with open(filename, 'r', encoding="utf-8") as file:
+
+        base_dir = os.path.dirname(os.path.abspath(__file__))
+        filepath = os.path.join(base_dir, filename)
+
+        with open(filepath, 'r', encoding="utf-8") as file:
             contents = file.read()
             print(contents)
     except FileNotFoundError:
