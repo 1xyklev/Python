@@ -34,13 +34,10 @@ class Ball:
 
         if pos[1] <= 0:
             self.y = 1
-
         if pos[3] >= self.canvas_height:
-            self.y = -1
-                  
+            self.y = -1               
         if pos[0] <= 0: # 왼쪽 벽에 닿으면 → 오른쪽으로 튕김
             self.x = 3
-
         if pos[2] >= self.canvas_width: # 오른쪽 벽에 닿으면 → 왼쪽으로 튕김
             self.x = -3
 
@@ -50,8 +47,8 @@ class Paddle: #패들 클래스 추가
         self.id = canvas.create_rectangle(0, 0, 100, 10, fill=color)
         self.canvas.move(self.id, 200, 300)
 
-        self.x = 0
-        self.canvas_width = self.canvas.winfo_width()
+        self.x = 0 #처음에는 안움직임
+        self.canvas_width = self.canvas.winfo_width() #너비를 저장하고 있기(벽에 부딪히면 처리하기 위해서)
         
         self.canvas.bind_all('<KeyPress-Left>', self.turn_left) # 키보드 이벤트 연결
         self.canvas.bind_all('<KeyPress-Right>', self.turn_right)
