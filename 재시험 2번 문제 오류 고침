@@ -1,0 +1,72 @@
+from tkinter import *
+from PIL import Image, ImageTk # Image, ImageTk 모두 import
+import os
+
+# 1. BASE_DIR 설정 (파일 경로 기준 설정)
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+
+# 2. Tkinter PhotoImage 객체 참조 유지를 위한 전역 변수 (필수!)
+tk_image_ref = None
+
+def draw_image1():
+    canvas.delete("all")
+    # 사각형 그리기 (50, 50)에서 (150, 150)
+    canvas.create_rectangle(50, 50, 150, 150, fill="tomato")
+
+def draw_image2():
+    canvas.delete("all")  # 이전 그림 지우기
+    # 원 그리기 (200, 80)에서 (300, 180)
+    canvas.create_oval(200, 80, 300, 180, fill="skyblue")
+
+def draw_image3():
+    global tk_image_ref
+    
+    # 3. 파일 경로 생성 및 이미지 로딩
+    IMAGE_FILENAME = "image1.png"
+    image_path = os.path.join(BASE_DIR, IMAGE_FILENAME)
+    
+    try:
+        # PIL로 이미지 열기
+        pil_img = Image.open(image_path)
+        # Tkinter PhotoImage로 변환
+        tk_img = ImageTk.PhotoImage(pil_img)
+        
+        # 중요: 전역 변수에 참조를 저장하여 가비지 컬렉션 방지
+        tk_image_ref = tk_img
+        
+        canvas.delete("all")
+        # 캔버스에 이미지 그리기 (20, 20 위치에 NW=NorthWest(좌상단) 앵커로 배치)
+        canvas.create_image(20, 20, anchor=NW, image=tk_image_ref)
+        
+    except FileNotFoundError:
+        canvas.delete("all")
+        canvas.create_text(200, 150, text=f"{IMAGE_FILENAME} 파일을 찾을 수 없습니다.\n스크립트 폴더에 파일이 있는지 확인하세요.", fill="red")
+    except Exception as e:
+        canvas.delete("all")
+        canvas.create_text(200, 150, text=f"이미지 로딩 오류: {e}", fill="red")
+
+
+def draw_image4():
+    global tk_image_ref
+    canvas.delete("all")
+    tk_image_ref = None # 참조 해제 (선택 사항이지만 안전함)
+
+root = Tk()
+root.title("중간고사 7번")
+root.geometry("420x440")
+
+canvas = Canvas(root, width=400, height=320, bg="white")
+canvas.pack()
+
+frame = Frame(root)
+frame.pack(pady=10)
+
+# 4. 버튼 연결 수정: 함수 이름만 전달 (괄호 제거)
+bt1=Button(frame, text="사각형", command=draw_image1).pack(side="left", padx=10)
+bt2=Button(frame, text="원", command=draw_image2).pack(side="left", padx=10)
+bt3=Button(frame, text="그림", command=draw_image3).pack(side="left",padx=10)
+bt4=Button(frame, text="지우기", command=draw_image4).pack(side="left",padx=10)
+
+Label(root, text = "버튼을 눌러 도형을 선택하세요.").pack()
+
+root.mainloop()
